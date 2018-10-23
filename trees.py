@@ -9,14 +9,15 @@ def main():
     tree = {'relation':[], 'attributes':[], 'data':[]}
 
     for line in file_input:
-        if(line[0:8] == '@relation'):
-            tree['relation'].append(line)
-        elif(line[0:9] == '@attribute'):
-            tree['attributes'].append(line)
-        elif(len(line) > 0 && line[0:5] != '@data'):
-            tree['data'].append(line)
+        if(line[0] != '%' and line != '\n'):
+            if(line[0:9] == '@relation'):
+                tree['relation'].append(line[10:])
+            elif(line[0:10] == '@attribute'):
+                tree['attributes'].append(line[11:])
+            elif(line[0:5] != '@data'):
+                tree['data'].append(line)
 
-    print(tree)
+    pp.pprint(tree)
 
 if __name__ == "__main__":
     main()
