@@ -56,7 +56,7 @@ def information_gain(data_table, attribute, parent_ent, attributes):
     return ig
 
 def id3_algorithm(data, actual_entropy, attributes, level):
-    tabs = "  "*level
+    tabs = "\t"*level
     if actual_entropy == 0:
         print(tabs, "ANSWER: ", data[0][max(attributes, key=int)])
     else:
