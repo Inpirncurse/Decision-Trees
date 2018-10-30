@@ -3,6 +3,8 @@ import fileinput
 import time
 import pprint as pp
 import random
+import numpy as np
+import math 
 
 def add_attribute(string, attributes):
     string = string.split(' ')
@@ -17,10 +19,33 @@ def add_attribute(string, attributes):
         for element in string[1:]:
             attributes[key]['values'].append(element.replace(',','').replace(' ','').replace('}','').replace('{',''))
 
-def entropy(data):
-    value = random.uniform(0.0, 1.0)
-    print(value)
-    return value
+def entropy(data_table, att):
+    last = list(att.keys())[-1]
+    last_att = att[last]
+    values = {}
+    #print('EL LAST ', last_att['values'])
+    
+    for lel in last_att['values']:
+        values[lel] = 0
+
+    for row in data_table:
+        values[row[-1]] += 1  
+
+    #print(values)
+
+    total = len(data_table)
+    #print(total)
+    entropy = 0
+    for key, value in values.items():
+        log2 = math.log((value/total), 2.0)
+        log2 *= -(value/total)
+        entropy += log2
+
+    print("Entropy: \n",entropy)
+    return entropy
+
+    
+
 
 
 def information_gain(data, attribute, entropy, attributes):
@@ -53,6 +78,9 @@ def main():
     pp.pprint(data)
     print("Attributes: ")
     pp.pprint(attributes)
+    
+    #entropy
+    entropy(data, attributes)
 
 if __name__ == "__main__":
     main()
