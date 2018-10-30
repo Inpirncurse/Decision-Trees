@@ -56,13 +56,11 @@ def information_gain(data_table, attribute, parent_ent, attributes):
     return ig
 
 def id3_algorithm(data, actual_entropy, attributes, level):
-    tabs = "\t"*level
+    tabs = "  "*level
     if actual_entropy == 0:
         print(tabs, "ANSWER: ", data[0][max(attributes, key=int)])
     else:
         ig = 0
-        array = [value for key,value in attributes.items()]
-
         # Iterate over all the attributes except the last one and save the greater value of ig
         for key,element in attributes.items():
             if(key != max(attributes, key=int)):
