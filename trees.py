@@ -59,7 +59,7 @@ def id3_algorithm(data, actual_entropy, attributes, level):
     if actual_entropy == 0:
         #print(max(attributes, key=int))
         #print(data)
-        print(tabs + "ANSWER:", data[0][max(attributes, key=int)])
+        print(tabs + "ANSWER: "+ data[0][max(attributes, key=int)])
     else:
         ig = 0
         # Iterate over all the attributes except the last one and save the greater value of ig
