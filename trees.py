@@ -73,7 +73,7 @@ def id3_algorithm(data, actual_entropy, attributes, level):
         # The greatest value is saved
         if(ig != 0):
             for value in attributes[k]['values']:
-                print(tabs + att + ":" + value)
+                print(tabs + att + ": " + value)
                 split = [row for row in data if value == row[k]]
                 e = entropy(split, attributes)
                 if(len(split) > 0):
