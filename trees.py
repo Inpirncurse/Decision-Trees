@@ -59,7 +59,7 @@ def id3_algorithm(data, actual_entropy, attributes, level):
     if actual_entropy == 0:
         #print(max(attributes, key=int))
         #print(data)
-        print(tabs + "ANSWER: ", data[0][max(attributes, key=int)])
+        print(tabs + "ANSWER:", data[0][max(attributes, key=int)])
     else:
         ig = 0
         # Iterate over all the attributes except the last one and save the greater value of ig
@@ -73,7 +73,7 @@ def id3_algorithm(data, actual_entropy, attributes, level):
         # The greatest value is saved
         if(ig != 0):
             for value in attributes[k]['values']:
-                print(tabs + att + ": " + value)
+                print(tabs + att + ":" + value)
                 split = [row for row in data if value == row[k]]
                 e = entropy(split, attributes)
                 if(len(split) > 0):
