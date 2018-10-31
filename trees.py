@@ -23,7 +23,6 @@ def entropy(data_table, attributes):
     last = max(attributes, key=int)
     last_att = attributes[last]
     values = {}
-
     for lel in last_att['values']:
         values[lel] = 0
     # Counts how many times each value appear in the last column
@@ -58,7 +57,9 @@ def information_gain(data_table, attribute, parent_ent, attributes):
 def id3_algorithm(data, actual_entropy, attributes, level):
     tabs = "  "*level
     if actual_entropy == 0:
-        print(tabs, "ANSWER: ", data[0][max(attributes, key=int)])
+        #print(max(attributes, key=int))
+        #print(data)
+        print(tabs + "ANSWER: ", data[0][max(attributes, key=int)])
     else:
         ig = 0
         # Iterate over all the attributes except the last one and save the greater value of ig
@@ -70,11 +71,13 @@ def id3_algorithm(data, actual_entropy, attributes, level):
                     att = element['name']
                     k = key
         # The greatest value is saved
-        for value in attributes[k]['values']:
-            print(tabs, att + ": ", value)
-            split = [row for row in data if value == row[k]]
-            e = entropy(split, attributes)
-            id3_algorithm(split, e, attributes, level+1)
+        if(ig != 0):
+            for value in attributes[k]['values']:
+                print(tabs + att + ": " + value)
+                split = [row for row in data if value == row[k]]
+                e = entropy(split, attributes)
+                if(len(split) > 0):
+                    id3_algorithm(split, e, attributes, level+1)
 
 
 def main():
@@ -89,7 +92,7 @@ def main():
                 format_attribute(re.sub(' +',' ', l), attributes)
             elif(line[0:5] != '@data' and line[0:5] != '@DATA' and line[0:9] != '@relation' and line[0:9] != '@REALTION'):
                 data.append(line.replace('\n','').split(','))
-
+    #pp.pprint(attributes)
     e = entropy(data, attributes)
     id3_algorithm(data, e, attributes, 0)
 
